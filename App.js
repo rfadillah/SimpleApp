@@ -1,20 +1,36 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { View, Text, StyleSheet, LogBox } from "react-native";
+import React from "react";
+import FlashMessage from "react-native-flash-message";
+import {
+  Poppins_400Regular,
+  Poppins_500Medium,
+  Poppins_600SemiBold,
+  Poppins_700Bold,
+  useFonts,
+} from "@expo-google-fonts/poppins";
+import { PaperProvider, configureFonts } from "react-native-paper";
+import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import AppLoading from "expo-app-loading";
+import { login } from "./screens";
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
+LogBox.ignoreAllLogs();
+const Stack = createNativeStackNavigator();
+
+const App = () => {
+  const [fontsLoaded] = useFonts({
+    Poppins_500Medium,
+    Poppins_400Regular,
+    Poppins_700Bold,
+    Poppins_600SemiBold,
+  });
+  return fontsLoaded ? (
+    <View>
+      <Text>App</Text>
     </View>
+  ) : (
+    <AppLoading />
   );
-}
+};
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+export default App;
